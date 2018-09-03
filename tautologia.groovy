@@ -1,10 +1,10 @@
-//Program Variables
-def ignoreLength = 3
-def repetitionThreshold = 3
-
 //Take Input
 def inputPane = javax.swing.JOptionPane.&showInputDialog
 def input = inputPane 'Enter your text :'
+def ignoreLength = inputPane 'Enter ignore length :'
+ignoreLength = Integer.parseInt(ignoreLength)
+def repetitionThreshold = inputPane 'Enter repetition threshold :'
+repetitionThreshold = Integer.parseInt(repetitionThreshold)
 assert input.length() > 0 : "Empty input"
 assert input.length() < 1000000 : "Input too long"
 
