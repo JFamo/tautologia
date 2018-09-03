@@ -21,5 +21,17 @@ content = content*.toLowerCase()
     //replace non alpha numeric
 content = content*.replaceAll("[^a-z0-9]","")
 
+//Setup Counter
+def count = [:]
+content.each{
+    if(count.containsKey(it)){
+        count[it] += 1
+    }
+    else{
+        count.put(it, 1)
+    }
+}
 
+//Debug - Print Lists
 println "$content"
+println "$count"
