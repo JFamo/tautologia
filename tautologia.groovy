@@ -1,12 +1,19 @@
 //Take Input
 def inputPane = javax.swing.JOptionPane.&showInputDialog
 def input = inputPane 'Enter your text :'
-def ignoreLength = inputPane 'Enter ignore length :'
-ignoreLength = Integer.parseInt(ignoreLength)
-def repetitionThreshold = inputPane 'Enter repetition threshold :'
-repetitionThreshold = Integer.parseInt(repetitionThreshold)
 assert input.length() > 0 : "Empty input"
 assert input.length() < 1000000 : "Input too long"
+//Get Ignore Length
+def ignoreLength = inputPane 'Enter ignore length :'
+assert ignoreLength.isInteger() : "Non-integer number entered!"
+ignoreLength = Integer.parseInt(ignoreLength)
+//Get Repetition Threshold
+def repetitionThreshold = inputPane 'Enter repetition threshold :'
+assert repetitionThreshold.isInteger() : "Non-integer number entered!"
+repetitionThreshold = Integer.parseInt(repetitionThreshold)
+
+//Define Output Pane
+def outputString = ""
 
 //Repeat Input
 println "Got input : $input"
@@ -48,11 +55,10 @@ count.keySet().each{
         if(count[it] >= repetitionThreshold){
             thiscount = count[it]
             assert thiscount > 0 : "Counting error"
-            println "Found flag $it with count $thiscount"
+            outputString += "$it has count $thiscount\n"
         }
     }
 }
 
-//Debug - Print Lists
-println "$content"
-println "$count"
+//Output
+javax.swing.JOptionPane.showMessageDialog(null, outputString)
