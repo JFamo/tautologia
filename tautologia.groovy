@@ -1,3 +1,7 @@
+//Program Variables
+def ignoreLength = 3
+def repetitionThreshold = 3
+
 //Take Input
 def inputPane = javax.swing.JOptionPane.&showInputDialog
 def input = inputPane 'Enter your text :'
@@ -29,6 +33,23 @@ content.each{
     }
     else{
         count.put(it, 1)
+    }
+}
+
+//Ensure Correct Counting
+count.values.each{
+    assert it > 0 : "Word Count Error"
+}
+
+//Iterate Map and Flag Words
+def thiscount = -1
+count.keySet().each{
+    if(it.length() > ignoreLength){
+        if(count[it] >= repetitionThreshold){
+            thiscount = count[it]
+            assert thiscount > 0 : "Counting error"
+            println "Found flag $it with count $thiscount"
+        }
     }
 }
 
