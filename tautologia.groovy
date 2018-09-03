@@ -11,17 +11,15 @@ println "Got input : $input"
 def content = [];
 content = input.split(" ") as List
 
-//Closure for Checking and Removing Empty List Items
-def bumpEmpty = { item ->
-    if(item.trim().length() <= 0){
-        content.remove(item)
-    }
-}
-
 //Standardize List Data
-//remove blank chars and spaces
-content.each{ bumpEmpty(it) }
-content*.replace("\t","")
-content*.toLowerCase()
+    //remove blank chars and spaces
+content.removeAll{ it.trim().length() <= 0 }
+    //replace spaces
+content = content*.replaceAll(" ","")
+    //make lower case
+content = content*.toLowerCase()
+    //replace non alpha numeric
+content = content*.replaceAll("[^a-z0-9]","")
+
 
 println "$content"
