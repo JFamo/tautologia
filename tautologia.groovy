@@ -8,6 +8,20 @@ assert input.length() < 1000000 : "Input too long"
 println "Got input : $input"
 
 //Split into List
-def content = input.split(" ")
+def content = [];
+content = input.split(" ") as List
+
+//Closure for Checking and Removing Empty List Items
+def bumpEmpty = { item ->
+    if(item.trim().length() <= 0){
+        content.remove(item)
+    }
+}
+
+//Standardize List Data
+//remove blank chars and spaces
+content.each{ bumpEmpty(it) }
+content*.replace("\t","")
+content*.toLowerCase()
 
 println "$content"
